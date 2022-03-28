@@ -18,7 +18,7 @@ Simple [2 player game](http://fed21-game.herokuapp.com/) built using [Node.js](h
 
 ### A few skills I've improved during this project:
 
-- collaboration using GitHub
+- collaborative development using GitHub
 - effective communication using Microsoft Teams
 - project management using Trello
 

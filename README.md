@@ -1,6 +1,6 @@
 # socket.io-game
 
-Simple [2 player game](http://kill-the-virus-powerpuff.herokuapp.com/) built using [Node.js](https://nodejs.org/en/), [Express](https://expressjs.com/), [Socket.io](https://socket.io/) and [MongoDB](https://www.mongodb.com/).
+Simple [2 player game](http://fed21-game.herokuapp.com/) built using [Node.js](https://nodejs.org/en/), [Express](https://expressjs.com/), [Socket.io](https://socket.io/) and [MongoDB](https://www.mongodb.com/).
 
 ## Table of contents
 * [Requirements](#requirements)

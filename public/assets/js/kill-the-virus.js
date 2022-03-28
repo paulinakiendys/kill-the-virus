@@ -187,7 +187,7 @@ socket.on('game:end', (winner, winnerPoints, loserOrTiePoints) => {
 // Listen for when game is ready to start
 socket.on('game:start', (randomDelay, randomPositionX, randomPositionY) => {
 
-    // get random virus imaga in every game
+    // get random virus image in every game
     virusImageEl.setAttribute("src", `./assets/images/virus_${Math.floor(Math.random() * 13) + 1}.png`);
 
     let timerTimeout = setTimeout(() => {
@@ -216,7 +216,7 @@ socket.on('game:start', (randomDelay, randomPositionX, randomPositionY) => {
     usernameFormInput.classList.remove('hide');
 });
 
-// listen when our opponent will send us his time amd then update his time on our side
+// listen when our opponent will send us his time and then update his time on our side
 socket.on('user:opponent_time', (paused_time_opponent) => {
     clearInterval(timerInterval_opponent);
     opponent_minutes.innerHTML = paused_time_opponent[0];
@@ -341,7 +341,7 @@ virusImageEl.addEventListener('click', e => {
     socket.emit('user:reaction', reactionTime);
 });
 
-// send information that opponet wants to play again
+// send information that opponent wants to play again
 play_again.addEventListener('click', e => {
     socket.emit('user:play_again', username, (status) => {
         winnerMsgEl.innerHTML = "Waiting for opponent...";
@@ -356,7 +356,7 @@ play_again.addEventListener('click', e => {
     });
 });
 
-// get username from form and show chat
+// get username from form and show game
 usernameForm.addEventListener('submit', e => {
     e.preventDefault();
 
@@ -373,7 +373,7 @@ usernameForm.addEventListener('submit', e => {
         opponent_disconnected_label.classList.add('hide');
         play_again.classList.remove('hide');
 
-        // if it is the second user and we don't need to wait, we hiding the start screen
+        // if it is the second user and we don't need to wait, hide the start screen
         if (!status.waiting_opponent) {
             startEl.classList.add('hide');
             gameWrapperEl.classList.remove('hide');

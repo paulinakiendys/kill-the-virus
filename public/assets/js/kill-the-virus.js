@@ -25,6 +25,7 @@ const play_again = document.querySelector('#play-again');
 const winner_heading = document.querySelector('#winner-heading');
 
 const virusImageEl = document.querySelector('#virus-image');
+const virusImageWrapperEl = document.querySelector('#virus-image-wrapper');
 
 let your_score = document.querySelector('#you-score');
 let opponent_score = document.querySelector('#opponent-score');
@@ -132,7 +133,6 @@ socket.on('users:score', (players) => {
         opponent_score.innerHTML = players[0].points;
         your_score.innerHTML = players[1].points;
     }
-    // console.log(players);
 });
 
 // the first user listening when the opponent will be found
@@ -172,8 +172,8 @@ socket.on('game:end', (winner, winnerPoints, loserOrTiePoints) => {
             The winner is<br> ${winner}<br> with ${winnerPoints} points!
         </p>
     `
-        // The winner is ${winner} with ${winnerPoints}-${loserOrTiePoints} points!  
-        // If it's a tie
+    
+    // If it's a tie
     if (winner == 'remis') {
         winnerMsgEl.innerHTML =
             `
@@ -194,10 +194,9 @@ socket.on('game:start', (randomDelay, randomPositionX, randomPositionY) => {
         resetTimer();
     }, 1000);
 
-    // Position virus image on grid
-
-    virusImageEl.style.gridRow = randomPositionX;
-    virusImageEl.style.gridColumn = randomPositionY;
+    // Position virus image wrapper on grid
+    virusImageWrapperEl.style.gridRow = randomPositionX;
+    virusImageWrapperEl.style.gridColumn = randomPositionY;
 
     // Display virus after delay
     let virusTimeout = setTimeout(() => {
@@ -303,8 +302,10 @@ socket.on('users:ready_again', () => {
 });
 
 socket.on('game:change_opponent', () => {
+    your_score.innerHTML = 0;
+    opponent_score.innerHTML = 0;
     play_again.classList.add('hide');
-})
+});
 
 socket.on('users:want_play_again', (opponent_username) => {
     let msg = document.createElement('p');
@@ -315,6 +316,9 @@ socket.on('users:want_play_again', (opponent_username) => {
 // send reaction time to server
 virusImageEl.addEventListener('click', e => {
     e.preventDefault();
+
+    let audio = new Audio("../assets/sounds/kill_virus.mp3");
+    audio.play();
 
     //hide image when clicked
     virusImageEl.classList.add('hide');
@@ -360,8 +364,6 @@ usernameForm.addEventListener('submit', e => {
     username_badge.innerHTML = username;
 
     socket.emit('user:joined', username, (status) => {
-        // we've received acknowledgement from the server
-        // console.log("Server acknowledged that user joined", status);
 
         // hiding start_button 'Play' and showing text that user needs to wait for another user
         start_button.classList.add('hide');

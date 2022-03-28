@@ -299,6 +299,7 @@ body {
 }
 
 .lobby-title-long {
+    padding-bottom: 34px;
     color: #426DFB;
     font-weight: 600;
     margin: 0.5rem 0.75rem;
